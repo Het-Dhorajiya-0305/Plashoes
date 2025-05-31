@@ -1,0 +1,262 @@
+*
+{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: var(--text-font);
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+    padding: 22px 3.3%;
+    background-color: rgb(253, 252, 252);
+    text-align: center;
+}
+
+.title_name {
+    text-transform: uppercase;
+    color: black;
+    font-size: 24px;
+    font-weight: 550;
+    letter-spacing: 5px;
+}
+.navlist .user{
+    display: none;
+}
+
+.navlist_iteam {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navlist_iteam li {
+    text-decoration: none;
+    display: inline-flex;
+    list-style: none;
+    color: rgb(145, 144, 144);
+    height: 30px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    align-items: center;
+    color: rgb(145, 144, 144);
+    font-size: 15px;
+    transition: color 0.4s;
+    
+}
+
+
+.navlist_iteam .menubar:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.menubar
+{
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0px 25px;
+    color: rgb(145, 144, 144);
+    font-size: 15px;
+    transition: color 0.4s;
+}
+
+
+.navlist_iteam .active {
+    padding: 2px;
+    border-bottom: 2px solid black;
+    color: black;
+}
+
+.menu_btn {
+    display: none;
+}
+.nav_right
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 10px;
+    padding: 0 10px;
+}
+.iteams
+{
+    width: 50px;
+    height: 40px;
+    position: relative; 
+    z-index: 1; 
+    cursor: pointer;
+}
+.nav_right .orders
+{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.iteam_count
+{
+    position: absolute;
+    top: -5px;
+    right: 13px;
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    font-size: 11px;
+    font-weight: bold;
+    
+}
+.navlist .link{
+    display: none;
+}
+
+.navlist .close-btn
+{
+    display: none;
+}
+
+.inside-btn
+{
+    display: none;
+}
+
+
+
+
+@media (max-width:1180px) {
+    nav {
+        padding: 20px 3%;
+    }
+    .title_name {
+        font-size: 24px;
+    }
+    .menubar
+    {
+        font-size: 17px;
+    }
+}
+
+@media (max-width:920px) {
+
+    .menu_btn {
+        display: block;
+        cursor: pointer;
+        color: grey;
+    }
+    .sing_in_btn .user {
+        display: none;
+    }
+    .sing_in_btn .link
+    {
+        display: none;
+        margin: 0;
+        padding: 0;
+    }
+    nav{
+        padding: 20px 2.7%;;
+    }
+    .navlist_iteam {
+        width: 100%;
+        height: 100vh;
+        padding: 2rem;
+        background-color: green;
+        position: absolute;
+        left: -300%;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        background-color: rgb(233, 230, 230);
+        transition: all .4s ease-in-out;
+        z-index: 2000;
+    }
+    .title_name
+    {
+        font-size: 21px;
+    }
+    .navlist_iteam li {
+        width: 100%;
+        height: 60px;
+        margin: 10px 0px;
+    }
+    .menubar {
+        width: 100%;
+        padding: 30px 0px;
+        font-size: 16px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.253);
+    }
+    .menubar:hover{
+        color:rgb(83, 83, 83) ;
+    }
+    .navlist .user {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding-left: 30px;
+    }
+    .navlist_iteam .active {
+        border: none;
+    }
+    .navlist .link {
+        display: block; 
+    }
+    .navlist .link:hover {
+        color: rgb(83, 83, 83) ;
+    }
+    .navlist .inside-btn {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        display: block;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    #show{
+        left: 0;
+    }
+    .nav_right
+    {
+        width: 100px;
+        position: absolute;
+        right: 0;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+    }
+}
+
+
+@media (max-width:700px) {
+    nav {
+        padding: 20px 2.2%;
+
+    }
+    .title_name {
+        font-size: 18px;
+    }
+}
+
+@media (max-width:450px) {
+    nav {
+        padding: 20px 1.8%;
+    }
+
+    .title_name {
+        font-size: 15px;
+    }
+}

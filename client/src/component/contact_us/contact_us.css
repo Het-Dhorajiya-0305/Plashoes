@@ -1,0 +1,154 @@
+.contact-us-main-container {
+    margin: 0;
+    padding: 2% 10%;
+    box-sizing: border-box;
+    background-color: #e9eae9c9;
+    width: 100%;
+    height: 100vh;
+}
+
+.contact-us-inner-container {
+    background-color: white;
+    height: 100%;
+    padding: 2% 8%;
+}
+
+.contact-us-inner-container .contact-us-title {
+    font-size: 45px;
+    font-family: var(--text-font);
+    text-transform: capitalize;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 15px;
+    color: #607260;
+}
+
+.contact-us-inner-container .contact-us-form {
+    height: 85%;
+    border: 1px solid #979a9b83;
+    padding: 2% 5%;
+
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.input-container label {
+    font-size: 18px;
+    margin: 5px;
+    font-weight: 600;
+    font-family: var(--text-font);
+    color: #979A9B;
+}
+
+.input-container input,
+textarea {
+    padding: 8px 2%;
+    font-family: var(--text-font);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.contact-us-form .full-name,
+.email-mobile-container {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.contact-us-form .full-name div {
+    width: 49%;
+}
+
+.contact-us-form .email-mobile-container div {
+    width: 49%;
+}
+
+.send-btn button {
+    text-align: center;
+    background-color: #6E7051;
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    padding: 12px 35px;
+    font-weight: 500;
+    border: none;
+    letter-spacing: 2px;
+    transition: all 0.5s;
+    margin-top: 10px;
+}
+
+.send-btn button:hover {
+    background-color: #2d2e2e;
+    cursor: pointer;
+}
+
+@media screen and (max-width:1200px) {
+    .contact-us-inner-container .contact-us-form {
+        height: 80%;
+    }
+}
+
+@media screen and (max-width:1000px) {
+    .contact-us-inner-container .contact-us-title
+    {
+        font-size: 35px;
+    }
+    .contact-us-inner-container .contact-us-form {
+        height: 88%;
+    }
+
+    .contact-us-form .full-name,
+    .email-mobile-container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .contact-us-form .full-name div {
+        width: 100%;
+    }
+
+    .contact-us-form .email-mobile-container div {
+        width: 100%;
+    }
+
+    .input-container textarea
+    {
+        height: 65px;
+    }
+}
+@media screen and (max-width:800px) {
+
+    .input-container textarea
+    {
+        height: 75px;
+    }
+}
+@media screen and (max-width:600px) {
+    .contact-us-main-container {
+        padding: 2% 8%;
+    }
+
+    .input-container textarea
+    {
+        height: 90px;
+    }
+}
+@media screen and (max-width:400px) {
+    .contact-us-main-container {
+        padding: 2% 5%;
+    }
+
+    .input-container textarea
+    {
+        height: 100px;
+    }
+    .send-btn button
+    {
+        width: 100%;
+        font-size: 16px;
+    }
+}

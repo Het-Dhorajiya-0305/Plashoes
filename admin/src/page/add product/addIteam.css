@@ -1,0 +1,12 @@
+.additeam-main-container {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.additeam-inner-container {
+    width: 79%;
+    height: 100%;
+    padding: 10px 15px;
+    background-color: white;
+}

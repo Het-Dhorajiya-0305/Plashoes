@@ -1,0 +1,329 @@
+*
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--text-font);
+}
+
+.sing-in-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  background: rgb(242,242,242);
+  background: linear-gradient(121deg, rgba(242,242,242,0.9921218487394958) 0%, rgba(224,224,224,1) 31%, rgba(205,205,205,1) 87%);
+}
+
+.inner-box
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  width: 800px;
+  position: relative;
+  border-radius: 20px;
+  background-color: green;
+  box-shadow: 0px 0px 20px 5px rgba(148,145,148,1);
+  overflow: hidden;
+  margin: 20px;
+}
+.form {
+  position: absolute;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background-color: #ffffff;
+  padding:0px 40px 0px 40px;
+  width: 50%;
+  height: 100%;
+  z-index: 1;
+  transition: all 2s ease-in-out,visibility 0.5s .6s ;
+  
+}
+.sing-in-main-container.active .form
+{
+  right: 50%;
+}
+
+
+.sing-up-container {
+  visibility: hidden;
+}
+
+.sing-in-main-container.active .form {
+  visibility: visible;
+}
+
+.name{
+  text-align: center;
+  font-size:35px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.form button {
+  align-self: flex-end;
+}
+
+.flex-column>label {
+  color: #151717;
+  font-weight: 600;
+}
+
+.inputForm {
+  border: 1.5px solid #ecedec;
+  border-radius: 10px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  transition: 0.2s ease-in-out;
+  gap:10px;
+}
+
+.input {
+  border-radius: 10px;
+  border: none;
+  width: 85%;
+  height: 100%;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.inputForm:focus-within {
+  border: 1.5px solid #2d79f3;
+}
+.input::placeholder {
+  font-family: var(--text-font);
+}
+.inputForm span
+{
+  cursor: pointer;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.flex-row>div>label {
+  font-size: 14px;
+  color: black;
+  font-weight: 400;
+}
+
+.span {
+  font-size: 14px;
+  margin-left: 5px;
+  color: #2d79f3;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button-submit {
+  margin: 20px 0 10px 0;
+  background-color: #151717;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  height: 45px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.button-submit:hover {
+  background-color: #252727;
+}
+.button-submit .link
+{
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+}
+.p {
+  text-align: center;
+  color: black;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.btn {
+  margin-top: 10px;
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  gap: 10px;
+  border: 1px solid #ededef;
+  background-color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.btn:hover {
+  border: 1px solid #2d79f3;
+  ;
+}
+
+.toggle-box
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+}
+.toggle-box::before
+{
+  content:'';
+  width: 300%;
+  height: 100%;
+  position: absolute;
+  left: -250%;
+  background-color: rgb(142, 145, 142);
+  /* border: 2px solid red; */
+  border-radius: 150px;
+  z-index: 2;
+  transition:1.5s ease-in-out;
+}
+.sing-in-main-container.active .toggle-box::before
+{
+  left: 50%;
+}
+.toggle-panel
+{
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background-color: rgba(21, 184, 21, 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  z-index: 2;
+  line-height: 47px;
+  transition: 0.6s ease-in-out;
+}
+.toggle-panel.toggle-right   
+{
+  right: -50%;
+  transition-delay: 0.6s;
+}
+.toggle-panel.toggle-left
+{
+  left: 0;
+  transition-delay: 1.2s;
+}
+.sing-in-main-container.active .toggle-panel.toggle-left
+{
+  left: -50%;
+  transition-delay: 0.6s;
+}
+.sing-in-main-container.active .toggle-panel.toggle-right
+{
+  right: 0;
+  transition-delay: 1.2s;
+}
+
+
+.toggle-panel button
+{
+  width: 160px;
+  background-color: transparent;
+  border: 2px solid #000000;
+  box-shadow: none;
+  height: 46px;
+  border-radius: 10px;
+  transition: all 0.5s;
+  font-weight: 600;
+}
+.toggle-panel button:hover{
+  background-color: #8a8888;
+  color: black;
+  cursor: pointer;
+}
+.toggle-panel h1{
+  font-size: 35px;
+  font-weight: 600;
+}
+.toggle-panel p{
+  font-size: 14px;
+  font-weight: 500;
+  color: black;
+}
+
+
+@media screen and (max-width:630px) {
+  .inner-box{
+    height: calc(100vh - 40px);
+  }
+  .form
+  {
+    /* background-color: rgb(179, 179, 19); */
+    bottom: 0px;
+    width: 100%;
+    height: 70%;
+  }
+  .sing-in-main-container.active .form
+  {
+    right: 0;
+    bottom: 30%;
+  }
+  .toggle-box::before
+  {
+    width: 100%;
+    height: 300%;
+    left: 0;
+    top: -270%;
+    border-radius: 20vw;
+  }
+  .sing-in-main-container.active .toggle-box::before{
+    left: 0;
+    top: 70%;
+  }
+  .toggle-panel{
+    width: 100%;
+    height:30%;
+  }
+  .toggle-panel.toggle-left
+  {
+    top: 0;
+  }
+  .sing-in-main-container.active .toggle-panel.toggle-left
+  {
+    left: 0;
+    top: -30%;
+  }
+  .toggle-panel.toggle-right
+  {
+    right: 0;
+    bottom: -30%;
+  }
+  .sing-in-main-container.active .toggle-panel.toggle-right{
+    bottom: 0;
+  }
+  
+}
+
+@media screen and (max-width:400px) {
+  .form{
+    padding: 0px 30px 0px 30px;
+  }
+  .toggle-panel h1{
+    font-size: 30px;
+  }
+}
