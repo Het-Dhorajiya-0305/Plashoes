@@ -1,7 +1,7 @@
 import User from '../models/usermodel.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 import validator from 'validator';
-
+import jwt from 'jsonwebtoken'
 
 const generateAccessAndRefereshTokens = async (userId) => {
     try {
@@ -34,15 +34,13 @@ const registerUser = asyncHandler(async (req, res) => {
         })
     }
 
-    if(!validator.isEmail(email))
-    {
+    if (!validator.isEmail(email)) {
         return res.status(400).json({
             success: false,
             message: "Please provide valid email",
         })
     }
-    if(password.length<8)   
-    {
+    if (password.length < 8) {
         return res.status(400).json({
             success: false,
             message: "password should be atleast 8 characters",
@@ -80,9 +78,10 @@ const registerUser = asyncHandler(async (req, res) => {
         })
     }
     return res.status(200).json({
-        message:"user created successfully",
+        message: "user created successfully",
         success: true,
-        user: createdUser})
+        user: createdUser
+    })
 })
 
 // loginUser
@@ -160,75 +159,109 @@ const logOutUser = asyncHandler(async (req, res) => {
             new: true
         })
 
-    const option={
-        httpOnly:true,
-        secure:true
+    const option = {
+        httpOnly: true,
+        secure: true
     }
 
     return res
-            .status(200)
-            .clearCookie("refreshToken",option)
-            .clearCookie("accessToken",option)
-            .json({
-                success:true,
-                username:logoutUser.userName,
-                message:"user successfully logout!!"
-            })
+        .status(200)
+        .clearCookie("refreshToken", option)
+        .clearCookie("accessToken", option)
+        .json({
+            success: true,
+            username: logoutUser.userName,
+            message: "user successfully logout!!"
+        })
 })
 
 // change password
 
 
-const changePassword=asyncHandler(async (req,res)=>{
-    const {oldPassword,newPassword}=req.body;
+const changePassword = asyncHandler(async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
 
-    if(!oldPassword||!newPassword)
-    {
+    if (!oldPassword || !newPassword) {
         return res.status(400).json({
-            success:false,
-            message:"please provide all the fields"
+            success: false,
+            message: "please provide all the fields"
         })
     }
 
 
-    const user=await User.findById(req.user?._id);
+    const user = await User.findById(req.user?._id);
 
 
-    if(!user)
-    {
+    if (!user) {
         return res.status(404).json({
-            success:false,
-            message:"user not found"
+            success: false,
+            message: "user not found"
         })
     }
 
-    const isPasswordCorrect=await user.isPasswordCorrect(oldPassword)
+    const isPasswordCorrect = await user.isPasswordCorrect(oldPassword)
 
-    if(!isPasswordCorrect)
-    {
+    if (!isPasswordCorrect) {
         return res.status(404).json({
-            success:false,
-            message:"invalid password"
+            success: false,
+            message: "invalid password"
         })
     }
 
-    if(oldPassword===newPassword)
-    {
+    if (oldPassword === newPassword) {
         return res.status(404).json({
-            success:false,
-            message:"new password should not be same as old password"
+            success: false,
+            message: "new password should not be same as old password"
         })
     }
 
-    user.password=newPassword;
-    await user.save({validateBeforeSave:false})
+    user.password = newPassword;
+    await user.save({ validateBeforeSave: false })
 
     return res.status(200).json({
-        success:true,
-        message:"passord changed successfully"
+        success: true,
+        message: "passord changed successfully"
     })
 
 })
 
+const adminLogin = asyncHandler(async (req, res) => {
 
-export { registerUser, loginUser, logOutUser, changePassword };
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+        return res.status(404).json({
+            success: false,
+            message: "userName and password are required"
+        })
+    }
+
+    if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
+        const token = await jwt.sign(
+            {
+                username,
+                password
+            },
+            process.env.REFRESH_TOKEN_SECRET,
+            {
+                expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+            })
+
+
+        const option = {
+            httpOnly: true,
+            secure: true
+        }
+
+        return res
+            .status(200)
+            .cookie("refreshToken",token,option)
+            .json({
+                success: true,
+                token
+            })
+    }
+})
+
+
+export { registerUser, loginUser, logOutUser, changePassword ,adminLogin};

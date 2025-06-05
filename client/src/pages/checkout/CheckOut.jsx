@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './checkout.css'
-import { Link } from 'react-router-dom'
-import defaultarray from '../../component/Defaultarray'
 import { FaRupeeSign } from "react-icons/fa";
+import { StoreContext } from '../../context/StoreContext';
+import { NavLink } from 'react-router-dom';
+
 
 function CheckOut() {
-    const array = defaultarray("male");
+    const { cartIteam } = useContext(StoreContext);
     let total = 0;
-    array.map((iteam) => {
+    cartIteam.map((iteam) => {
         total += iteam.price * iteam.quantity;
     })
+
+
+    const submit = () => {
+        console.log("form submites")
+    }
     return (
         <div className='checkout-main-container'>
             <div className="checkout-inner-container">
@@ -21,20 +27,15 @@ function CheckOut() {
                         <div className="billing-title">
                             billing details
                         </div>
-                        <form action="">
-                            <input type="text" name="" id="" placeholder='First name' />
-                            <input type="text" name="" id="" placeholder='last name' />
-                            <input type="text" name="" id="" placeholder='Mobile no.' />
-                            <textarea name="" id="" placeholder='Address'></textarea>
+                        <form action="" onSubmit={submit}>
+                            <input required type="text" placeholder='First name' />
+                            <input required type="text" placeholder='last name' />
+                            <input required type="text" placeholder='Mobile no.' />
+                            <textarea required name="" id="" placeholder='Address'></textarea>
+                            <button type="submit" className="payment-btn">
+                                    place order
+                            </button>
                         </form>
-                        <div className="payment">
-                            <div className="payment-title">
-                                payment
-                            </div>
-                            <div >
-                                <Link className="payment-btn link">place order</Link>
-                            </div>
-                        </div>
                     </div>
                     <div className="customer-orders mg-10">
                         <div className="your-order">
@@ -46,7 +47,7 @@ function CheckOut() {
                                 <span>subtotal</span>
                             </div>
                             <div className="order-iteam-list">
-                                {array.map((arr, index) => (
+                                {cartIteam.map((arr, index) => (
                                     <div className="orders-iteam pd-20" key={index}>
                                         <span><img src={arr.loc} alt={arr.name} />{arr.name} x {arr.quantity}</span>
                                         <span className='rupee'><FaRupeeSign />{arr.price * arr.quantity}</span>
@@ -54,27 +55,27 @@ function CheckOut() {
                                 ))}
                             </div>
                             <div className="count-main-cont">
-                            <div className="subtotal-count pd-15 count-cont">
-                                <span>subtotal</span>
-                                <span className='rupee'>
-                                    <FaRupeeSign />{total}
-                                </span>
-                            </div>
-                            <div className="gst-count pd-15 count-cont">
-                                <span>GST</span>
-                                <span className='rupee'>
-                                    <FaRupeeSign />{total * 0.18}
-                                </span>
-                            </div>
-                            <div className="total-count pd-15 count-cont">
-                                <span>total </span>
-                                <span className='rupee'>
-                                   <FaRupeeSign />{total + (total * 0.18)}
-                                </span>
+                                <div className="subtotal-count pd-15 count-cont">
+                                    <span>subtotal</span>
+                                    <span className='rupee'>
+                                        <FaRupeeSign />{total}
+                                    </span>
+                                </div>
+                                <div className="gst-count pd-15 count-cont">
+                                    <span>GST</span>
+                                    <span className='rupee'>
+                                        <FaRupeeSign />{total * 0.18}
+                                    </span>
+                                </div>
+                                <div className="total-count pd-15 count-cont">
+                                    <span>total </span>
+                                    <span className='rupee'>
+                                        <FaRupeeSign />{total + (total * 0.18)}
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                        </div>
-                       
+
 
                     </div>
                 </div>

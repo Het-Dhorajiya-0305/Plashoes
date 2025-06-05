@@ -108,7 +108,34 @@ const deleteProduct=asyncHandler(async (req,res)=>{
 
 })
 
+const listProduct=asyncHandler(async (req,res)=>{
+    const productData=await Product.find({});
+    return res.status(200).json({
+        success:true,
+        productData
+    })
+})
+
+const singleProduct=asyncHandler(async (req,res)=>{
+
+    const {productId}=req.params;
+
+    const product=await Product.findById(productId);
+
+    if(!product)
+    {
+        return res.status(500).json({
+            success:false,
+            message:"product does not exist!!"
+        })
+    }
+    return res.status(200).json({
+        success:true,
+        product
+    })
+})
 
 
 
-export { addProduct,deleteProduct};
+
+export { addProduct,deleteProduct,listProduct,singleProduct};

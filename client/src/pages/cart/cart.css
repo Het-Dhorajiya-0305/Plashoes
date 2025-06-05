@@ -48,6 +48,7 @@
     border-bottom: none;
     text-align: center;
     border-collapse: collapse;
+    width: 100%;
 }
 
 .cart-left th {

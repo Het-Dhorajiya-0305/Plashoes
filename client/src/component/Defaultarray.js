@@ -26,14 +26,14 @@ import tosca_city from '../assets/tosca_city.jpg';
 export default function defaultarray(gender) {
     if (gender === "male") {
         const arr = [
-            { id: "1", gender: "male", name: "men's navy running", price: 8740, loc: shoes7, description: "A sleek and stylish navy blue running shoe designed for comfort and durability, perfect for both casual joggers and seasoned runners." },
-            { id: "2", gender: "male", name: "men's green running", price: 7480, loc: shoes8, description: "A lightweight, breathable running shoe with a vibrant green tone, offering great grip and shock absorption." },
-            { id: "3", gender: "male", name: "men's classic mint", price: 6720, loc: mint_shoes, description: "A fresh take on classic sneaker design, featuring a cool mint colorway and a timeless silhouette for everyday wear." },
-            { id: "4", gender: "male", name: "men's red running", price: 7478, loc: red_shoes, description: "A bold red running shoe engineered for speed and agility, with cushioned soles for enhanced comfort." },
-            { id: "5", gender: "male", name: "men's black running", price: 4789, loc: black_shoes, description: "A versatile and minimalist black running shoe, ideal for training sessions and casual wear alike." },
-            { id: "6", gender: "male", name: "men's earth-tone sneaker", price: 7512, loc: shoes13, description: "A stylish sneaker featuring earthy hues, blending fashion with function for a laid-back yet sophisticated look." },
-            { id: "7", gender: "male", name: "men's moonstone sneaker", price: 4980, loc: shoes14, description: "Inspired by the elegance of moonstone, this sneaker combines light hues and superior comfort for all-day wear." },
-            { id: "8", gender: "male", name: "men's classic blue", price: 6218, loc: shoes1, description: "A timeless blue sneaker that offers a balance of durability and flexibility, perfect for daily activities." },
+            { id: "13", gender: "male", name: "men's navy running", price: 8740, loc: shoes7, description: "A sleek and stylish navy blue running shoe designed for comfort and durability, perfect for both casual joggers and seasoned runners." },
+            { id: "14", gender: "male", name: "men's green running", price: 7480, loc: shoes8, description: "A lightweight, breathable running shoe with a vibrant green tone, offering great grip and shock absorption." },
+            { id: "15", gender: "male", name: "men's classic mint", price: 6720, loc: mint_shoes, description: "A fresh take on classic sneaker design, featuring a cool mint colorway and a timeless silhouette for everyday wear." },
+            { id: "16", gender: "male", name: "men's red running", price: 7478, loc: red_shoes, description: "A bold red running shoe engineered for speed and agility, with cushioned soles for enhanced comfort." },
+            { id: "17", gender: "male", name: "men's black running", price: 4789, loc: black_shoes, description: "A versatile and minimalist black running shoe, ideal for training sessions and casual wear alike." },
+            { id: "18", gender: "male", name: "men's earth-tone sneaker", price: 7512, loc: shoes13, description: "A stylish sneaker featuring earthy hues, blending fashion with function for a laid-back yet sophisticated look." },
+            { id: "19", gender: "male", name: "men's moonstone sneaker", price: 4980, loc: shoes14, description: "Inspired by the elegance of moonstone, this sneaker combines light hues and superior comfort for all-day wear." },
+            { id: "20", gender: "male", name: "men's classic blue", price: 6218, loc: shoes1, description: "A timeless blue sneaker that offers a balance of durability and flexibility, perfect for daily activities." },
         ];
         return arr;
     } else if (gender === "female") {
@@ -67,14 +67,14 @@ export default function defaultarray(gender) {
             { id: "10", gender: "female", name: "women pink training", price: 4503, loc: pink_training, description: "A vibrant pink training shoe designed for comfort and agility, ideal for gym sessions and outdoor activities." },
             { id: "11", gender: "female", name: "women tan sneaker", price: 8540, loc: shoes9, description: "A trendy tan-colored sneaker that blends versatility with modern style, suitable for multiple occasions." },
             { id: "12", gender: "female", name: "women tosca city run", price: 8450, loc: tosca_city, description: "A unique city running shoe in a beautiful tosca hue, perfect for those who want to stand out with style and performance." },
-            { id: "1", gender: "male", name: "men's navy running", price: 8740, loc: shoes7, description: "A sleek and stylish navy blue running shoe designed for comfort and durability, perfect for both casual joggers and seasoned runners." },
-            { id: "2", gender: "male", name: "men's green running", price: 7480, loc: shoes8, description: "A lightweight, breathable running shoe with a vibrant green tone, offering great grip and shock absorption." },
-            { id: "3", gender: "male", name: "men's classic mint", price: 6720, loc: mint_shoes, description: "A fresh take on classic sneaker design, featuring a cool mint colorway and a timeless silhouette for everyday wear." },
-            { id: "4", gender: "male", name: "men's red running", price: 7478, loc: red_shoes, description: "A bold red running shoe engineered for speed and agility, with cushioned soles for enhanced comfort." },
-            { id: "5", gender: "male", name: "men's black running", price: 4789, loc: black_shoes, description: "A versatile and minimalist black running shoe, ideal for training sessions and casual wear alike." },
-            { id: "6", gender: "male", name: "men's earth-tone sneaker", price: 7512, loc: shoes13, description: "A stylish sneaker featuring earthy hues, blending fashion with function for a laid-back yet sophisticated look." },
-            { id: "7", gender: "male", name: "men's moonstone sneaker", price: 4980, loc: shoes14, description: "Inspired by the elegance of moonstone, this sneaker combines light hues and superior comfort for all-day wear." },
-            { id: "8", gender: "male", name: "men's classic blue", price: 6218, loc: shoes1, description: "A timeless blue sneaker that offers a balance of durability and flexibility, perfect for daily activities." }
+            { id: "13", gender: "male", name: "men's navy running", price: 8740, loc: shoes7, description: "A sleek and stylish navy blue running shoe designed for comfort and durability, perfect for both casual joggers and seasoned runners." },
+            { id: "14", gender: "male", name: "men's green running", price: 7480, loc: shoes8, description: "A lightweight, breathable running shoe with a vibrant green tone, offering great grip and shock absorption." },
+            { id: "15", gender: "male", name: "men's classic mint", price: 6720, loc: mint_shoes, description: "A fresh take on classic sneaker design, featuring a cool mint colorway and a timeless silhouette for everyday wear." },
+            { id: "16", gender: "male", name: "men's red running", price: 7478, loc: red_shoes, description: "A bold red running shoe engineered for speed and agility, with cushioned soles for enhanced comfort." },
+            { id: "17", gender: "male", name: "men's black running", price: 4789, loc: black_shoes, description: "A versatile and minimalist black running shoe, ideal for training sessions and casual wear alike." },
+            { id: "18", gender: "male", name: "men's earth-tone sneaker", price: 7512, loc: shoes13, description: "A stylish sneaker featuring earthy hues, blending fashion with function for a laid-back yet sophisticated look." },
+            { id: "19", gender: "male", name: "men's moonstone sneaker", price: 4980, loc: shoes14, description: "Inspired by the elegance of moonstone, this sneaker combines light hues and superior comfort for all-day wear." },
+            { id: "20", gender: "male", name: "men's classic blue", price: 6218, loc: shoes1, description: "A timeless blue sneaker that offers a balance of durability and flexibility, perfect for daily activities." }
         ];
         return arr2;
     }

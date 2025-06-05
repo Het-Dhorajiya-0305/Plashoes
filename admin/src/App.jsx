@@ -12,12 +12,13 @@ function App() {
   return (
 
     <div className="App">
+      <Sidebar></Sidebar>
       <Routes>
         <Route path='/admin' element={<Sidebar></Sidebar>}></Route>
-        <Route path='/iteamList' element={<Product></Product>}></Route>
-        <Route path='/addIteams' element={<AddIteam></AddIteam>}></Route>
-        <Route path='/orders' element={<Orders></Orders>}></Route>
-        <Route path='/adminLogin' element={<AdminLogin></AdminLogin>}></Route>
+        <Route path='/admin/iteamList' element={<Product></Product>}></Route>
+        <Route path='/admin/addIteams' element={<AddIteam></AddIteam>}></Route>
+        <Route path='/admin/orders' element={<Orders></Orders>}></Route>
+        <Route path='/admin/login' element={<AdminLogin></AdminLogin>}></Route>
       </Routes>
     </div>
   )

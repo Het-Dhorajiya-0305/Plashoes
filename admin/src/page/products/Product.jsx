@@ -11,7 +11,6 @@ function Product() {
   const arr = defaultarray("");
   return (
     <div className='main-iteam-container'>
-      <Sidebar></Sidebar>
       <div className="iteam-list-inner-container">
         <div className="heading">
           <div className="image-heading"></div>

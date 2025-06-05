@@ -15,17 +15,17 @@ function Sidebar() {
                 <div className="sidebar">   
                     <ul className='sidebar_iteam' >
                         <div className="add-iteams">
-                            <li className="add-iteam-li"><NavLink to="/addIteams" className='link'><IoIosAddCircle size={25} className='icon'/><span>add iteam</span></NavLink></li>
+                            <li className="add-iteam-li"><NavLink to="/admin/addIteams" className='link'><IoIosAddCircle size={25} className='icon'/><span>add iteam</span></NavLink></li>
                         </div>
                         <div className="iteam-list">
-                            <li className="iteam-list-li"><NavLink to="/iteamList" className='link'><FaList size={22} className='icon'/><span>iteams</span></NavLink></li>
+                            <li className="iteam-list-li"><NavLink to="/admin/iteamList" className='link'><FaList size={22} className='icon'/><span>iteams</span></NavLink></li>
                         </div>
                         <div className="orders">
-                            <li className="orders-li"><NavLink to="/orders" className='link'><FaCartShopping size={25} className='icon'/><span>orders</span></NavLink></li>
+                            <li className="orders-li"><NavLink to="/admin/orders" className='link'><FaCartShopping size={25} className='icon'/><span>orders</span></NavLink></li>
                         </div>
                     </ul>
                 </div>
-                <div className="login-btn"><NavLink to="/adminLogin" className='link'>Login</NavLink></div>
+                <div className="login-btn"><NavLink to="/admin/login" className='link'>Login</NavLink></div>
             </div>
         </div>
     )

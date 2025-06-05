@@ -1,37 +1,24 @@
-import React, { useState } from 'react'
-import defaultarray from '../../component/Defaultarray';
+import React, { useContext, useEffect, useState } from 'react'
 import './cart.css'
 import { FaRupeeSign } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { Link } from 'react-router-dom';
+import { StoreContext } from '../../context/StoreContext';
 
 function Cart() {
-  const [cartItems, setCartItems] = useState(defaultarray("male"));
+  const { cartIteam, increamentOrder, decreamentOrder, deleteIteam } = useContext(StoreContext)
 
-  function increamentOrder(index) {
-    setCartItems((prevCart) =>
-      prevCart.map((item, i) =>
-        i === index ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
-  }
-
-  function decreamentOrder(index) {
-    setCartItems((prevCart) =>
-      prevCart.map((item, i) =>
-        i === index && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
-      )
-    );
-  }
+  const [cartData, setCartData] = useState(cartIteam);
 
   let total = 0;
-  cartItems.map((iteam) => {
+  useEffect(() => {
+    setCartData(cartIteam);
+
+  }, [cartIteam])
+
+  cartData.map((iteam) => {
     total += iteam.price * iteam.quantity;
   })
-
-  function deleteIteam() {
-    console.log("iteam deleted");
-  }
 
   return (
     <div className="main-cart-container">
@@ -48,34 +35,34 @@ function Cart() {
                   <th className='product-detail'>Product</th>
                   <th>Price</th>
                   <th>Quantity</th>
-                  <th>Subtotal</th>
+                  <th>size</th>
                 </tr>
               </thead>
               <tbody>
-                {cartItems.map((arr, index) => (
-                  <tr className='height-more' key={arr.id}>
+                {cartData.map((arr, index) => (
+                  <tr className='height-more' key={index}>
                     <td className='empty-con'>
-                      <MdDelete onClick={deleteIteam} className='delete-btn' />
+                      <MdDelete onClick={() => deleteIteam(arr)} className='delete-btn' />
                       <img className="img-fluid" src={arr.loc} alt={arr.name} />
                     </td>
                     <td className='black'>{arr.name}</td>
                     <td className='light-grey rupee'><FaRupeeSign />{arr.price}</td>
                     <td>
                       <div className="increament-btn">
-                        <div className="minus" onClick={() => decreamentOrder(index)}>-</div>
+                        <div className="minus" onClick={() => decreamentOrder(arr)}>-</div>
                         <div className="orders-count">{arr.quantity}</div>
-                        <div className="plus" onClick={() => increamentOrder(index)}>+</div>
+                        <div className="plus" onClick={() => increamentOrder(arr)}>+</div>
                       </div>
                     </td>
-                    <td className='light-grey rupee'><FaRupeeSign />{arr.price * arr.quantity}</td>
+                    <td className='light-grey rupee'>{arr.size}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            {cartItems.map((arr, index) => (
-              <div className="cart-iteam">
+            {cartData.map((arr, index) => (
+              <div className="cart-iteam" key={index}>
                 <div className="delete">
-                  <MdDelete onClick={deleteIteam} className='delete-btn' />
+                  <MdDelete onClick={() => deleteIteam(arr)} className='delete-btn' />
                 </div>
                 <div className="image-container">
                   <img className="img-fluid" src={arr.loc} alt={arr.name} />
@@ -92,9 +79,9 @@ function Cart() {
                   <span className='product-title'>quantity</span>
                   <span className='incre'>
                     <div className="increament-btn">
-                      <div className="minus" onClick={() => decreamentOrder(index)}>-</div>
+                      <div className="minus" onClick={() => decreamentOrder(arr)}>-</div>
                       <div className="orders-count">{arr.quantity}</div>
-                      <div className="plus" onClick={() => increamentOrder(index)}>+</div>
+                      <div className="plus" onClick={() => increamentOrder(arr)}>+</div>
                     </div>
                   </span>
                 </div>

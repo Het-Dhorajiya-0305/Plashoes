@@ -20,8 +20,12 @@ const userSchema = new mongoose.Schema({
     },
     refreshToken:{
         type:String
+    },
+    cartData:{
+        type:Object,
+        default:{}
     }
-}, { timestamps: true })
+}, { timestamps: true,minimize:false })
 
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {

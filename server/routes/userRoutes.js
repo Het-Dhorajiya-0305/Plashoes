@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { changePassword, loginUser, logOutUser, registerUser } from "../controllers/userController.js";
+import { adminLogin, changePassword, loginUser, logOutUser, registerUser } from "../controllers/userController.js";
 import verifyUser from "../middleware/authMiddleware.js";
 
 
@@ -9,6 +9,8 @@ router.post('/register',registerUser);
 
 
 router.post('/login',loginUser)
+
+router.post('/adminlogin',adminLogin)
 
 router.get("/logout",verifyUser,logOutUser)
 
