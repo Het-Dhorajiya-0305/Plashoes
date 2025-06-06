@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import './sidebar.css'
 import { IoIosAddCircle } from "react-icons/io";
 import { FaList } from "react-icons/fa6";
@@ -12,20 +12,18 @@ function Sidebar() {
         <div className='sidebar-main-container'>
             <div className='sidebar-container'>
                 <h1 className='title-name'>PLASHOES</h1>
-                <div className="sidebar">   
-                    <ul className='sidebar_iteam' >
-                        <div className="add-iteams">
-                            <li className="add-iteam-li"><NavLink to="/admin/addIteams" className='link'><IoIosAddCircle size={25} className='icon'/><span>add iteam</span></NavLink></li>
+                <div className="sidebar">
+                    <div className="add-iteams">
+                        <NavLink to="/admin/addIteams" className='link'><IoIosAddCircle size={25} className='icon' /><span>add iteam</span></NavLink>
                         </div>
-                        <div className="iteam-list">
-                            <li className="iteam-list-li"><NavLink to="/admin/iteamList" className='link'><FaList size={22} className='icon'/><span>iteams</span></NavLink></li>
-                        </div>
-                        <div className="orders">
-                            <li className="orders-li"><NavLink to="/admin/orders" className='link'><FaCartShopping size={25} className='icon'/><span>orders</span></NavLink></li>
-                        </div>
-                    </ul>
+                    <div className="iteam-list">
+                        <NavLink to="/admin/iteamList" className='link'><FaList size={22} className='icon' /><span>iteams</span></NavLink>
+                    </div>
+                    <div className="orders">
+                        <NavLink to="/admin/orders" className='link'><FaCartShopping size={25} className='icon' /><span>orders</span></NavLink>
+                    </div>
                 </div>
-                <div className="login-btn"><NavLink to="/admin/login" className='link'>Login</NavLink></div>
+                <button className="login-btn">Log Out</button>
             </div>
         </div>
     )

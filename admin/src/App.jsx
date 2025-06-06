@@ -1,4 +1,5 @@
 
+import { useState } from 'react'
 import './App.css'
 import Sidebar from './component/sidebar/Sidebar.jsx'
 import AddIteam from './page/add product/AddIteam.jsx'
@@ -9,17 +10,21 @@ import { Routes, Route } from 'react-router-dom'
 
 function App() {
 
+  const [token, setToken] = useState("1");
+
   return (
 
     <div className="App">
-      <Sidebar></Sidebar>
-      <Routes>
-        <Route path='/admin' element={<Sidebar></Sidebar>}></Route>
-        <Route path='/admin/iteamList' element={<Product></Product>}></Route>
-        <Route path='/admin/addIteams' element={<AddIteam></AddIteam>}></Route>
-        <Route path='/admin/orders' element={<Orders></Orders>}></Route>
-        <Route path='/admin/login' element={<AdminLogin></AdminLogin>}></Route>
-      </Routes>
+      {token === "" ? <AdminLogin></AdminLogin> : <>
+        <Sidebar></Sidebar>
+        <Routes>
+          <Route path='/admin' element={<Sidebar></Sidebar>}></Route>
+          <Route path='/admin/iteamList' element={<Product></Product>}></Route>
+          <Route path='/admin/addIteams' element={<AddIteam></AddIteam>}></Route>
+          <Route path='/admin/orders' element={<Orders></Orders>}></Route>
+        </Routes>
+      </>}
+
     </div>
   )
 }

@@ -1,12 +1,9 @@
-import { faDiagramNext } from '@fortawesome/free-solid-svg-icons'
 import jwt from 'jsonwebtoken'
 
 
 const verifyAdmin = async (req, res, next) => {
     try {
-        const token = req.cookies?.accessToken || req.header("token")?.replace("Bearer ", "")
-
-        console.log(token)
+        const token = req.cookies?.refreshToken || req.header("token")?.replace("Bearer ", "")
 
         if (!token) {
             return res.status(400).json({
@@ -17,10 +14,7 @@ const verifyAdmin = async (req, res, next) => {
 
         const token_decode = await jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
 
-        console.log(token_decode)
-        console.log( process.env.ADMIN_USERNAME + process.env.ADMIN_PASSWORD)
-
-        if (token_decode !== process.env.ADMIN_USERNAME + process.env.ADMIN_PASSWORD) {
+        if (token_decode.username+token_decode.password !== process.env.ADMIN_USERNAME + process.env.ADMIN_PASSWORD) {
             return res.status(400).json({
                 success: false,
                 message: "incorrect password"

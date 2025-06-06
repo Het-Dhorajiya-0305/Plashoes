@@ -11,4 +11,4 @@ router.get("/listproduct",listProduct)
 router.get("/:productId",singleProduct)
 
 
-export default router;
+export default router; 

@@ -255,7 +255,7 @@ const adminLogin = asyncHandler(async (req, res) => {
 
         return res
             .status(200)
-            .cookie("refreshToken",token,option)
+            .cookie("refreshToken", token, option)
             .json({
                 success: true,
                 token
@@ -263,5 +263,16 @@ const adminLogin = asyncHandler(async (req, res) => {
     }
 })
 
+const adminLogOut = asyncHandler(async (req, res) => {
+    const option = {
+        httpOnly: true,
+        secure: true
+    }
+    return res.status(200).clearCookie("refreshToken", option).json({
+        success:true,
+        message:"admin logout!!"
+    })
+})
 
-export { registerUser, loginUser, logOutUser, changePassword ,adminLogin};
+
+export { registerUser, loginUser, logOutUser, changePassword, adminLogin,adminLogOut };

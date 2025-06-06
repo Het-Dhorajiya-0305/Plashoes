@@ -11,8 +11,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: rgb(242,242,242);
-  background: linear-gradient(121deg, rgba(242,242,242,0.9921218487394958) 0%, rgba(224,224,224,1) 31%, rgba(205,205,205,1) 87%);
+  width: 100%;
 }
 .form {
   display: flex;
@@ -122,14 +121,11 @@
 }
 
 @media screen and (max-width:630px) {
-  .inner-box{
-    height: calc(100vh - 40px);
-  }
-  .form
+  .admin-login-form .form
   {
     bottom: 0px;
     width: 100%;
-    height: 70%;
+    height: 400px
   }
   .sing-in-main-container.active .form
   {
