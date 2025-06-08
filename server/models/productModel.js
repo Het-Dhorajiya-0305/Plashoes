@@ -18,8 +18,8 @@ const productSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-    proStock:{
-        type:Number,
+    proSize:{
+        type:Array,
         required:true,
     },
     proImage:{
@@ -27,7 +27,7 @@ const productSchema=new mongoose.Schema({
         required:true,
     }
 
-},{timestamps:true})
+},{timestamps:true});
 
 const Product=mongoose.model("product",productSchema);
 

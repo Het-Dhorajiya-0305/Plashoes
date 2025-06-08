@@ -10,9 +10,11 @@ import {uploadImage, deleteImage } from "../utils/cloudinary.js";
 const addProduct = asyncHandler(async (req, res) => {
 
 
-    const { proName, proPrice, proDescription, gender, proStock } = req.body;
+    const { proName, proPrice, proDescription, proGender, proSize} = req.body;
 
-    if (!proName || !proPrice || !proDescription || !gender || !proStock) {
+    console.log(proDescription,proGender,proName,proPrice,proSize)
+
+    if (!proName || !proPrice || !proDescription || !proGender || !proSize || !proImg) {
         return res.status(400).json({
             success: false,
             message: "please fill all the fields"
@@ -20,6 +22,7 @@ const addProduct = asyncHandler(async (req, res) => {
     }
 
     const existedProduct = await Product.findOne({ proName });
+
 
     if (existedProduct) {
         return res.status(400).json({
@@ -50,9 +53,9 @@ const addProduct = asyncHandler(async (req, res) => {
 
     const product = await Product.create({
         proName,
-        proPrice,
+        proPrice:Number(proPrice),
         proDescription,
-        proStock,
+        proSize:JSON.parse(proSize),
         gender,
         proImage: imageUrl.url
     })
