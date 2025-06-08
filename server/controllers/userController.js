@@ -227,25 +227,27 @@ const changePassword = asyncHandler(async (req, res) => {
 
 const adminLogin = asyncHandler(async (req, res) => {
 
-    const { username, password } = req.body;
+    const { email, password } = req.body;
+    console.log("server data : ", email, password)
 
-    if (!username || !password) {
+    if (!email || !password) {
         return res.status(404).json({
             success: false,
             message: "userName and password are required"
         })
     }
 
-    if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
+    if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
         const token = await jwt.sign(
             {
-                username,
+                email,
                 password
             },
             process.env.REFRESH_TOKEN_SECRET,
             {
                 expiresIn: process.env.REFRESH_TOKEN_EXPIRY
             })
+
 
 
         const option = {
@@ -261,6 +263,13 @@ const adminLogin = asyncHandler(async (req, res) => {
                 token
             })
     }
+    else
+    {
+        return res.status(400).json({
+            success:false,
+            message:"email and password incorrect!!"
+        })
+    }
 })
 
 const adminLogOut = asyncHandler(async (req, res) => {
@@ -269,10 +278,10 @@ const adminLogOut = asyncHandler(async (req, res) => {
         secure: true
     }
     return res.status(200).clearCookie("refreshToken", option).json({
-        success:true,
-        message:"admin logout!!"
+        success: true,
+        message: "admin logout!!"
     })
 })
 
 
-export { registerUser, loginUser, logOutUser, changePassword, adminLogin,adminLogOut };
+export { registerUser, loginUser, logOutUser, changePassword, adminLogin, adminLogOut };

@@ -5,7 +5,6 @@
     height: 100%;
 }
 .sidebar div .active {
-    /* border: 2px solid rgba(5, 0, 0, 0.945); */
     background-color: rgb(230, 228, 228);
 }
 
@@ -61,10 +60,6 @@
 .sidebar div .link:hover {
     border: 1px solid rgba(109, 108, 108, 0.974);
 
-}
-
-.sidebar-container .login-btn {
-    text-align: right;
 }
 
 .sidebar-container .login-btn {

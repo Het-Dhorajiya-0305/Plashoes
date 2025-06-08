@@ -14,7 +14,7 @@ const verifyAdmin = async (req, res, next) => {
 
         const token_decode = await jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
 
-        if (token_decode.username+token_decode.password !== process.env.ADMIN_USERNAME + process.env.ADMIN_PASSWORD) {
+        if (token_decode.email+token_decode.password !== process.env.ADMIN_EMAIL + process.env.ADMIN_PASSWORD) {
             return res.status(400).json({
                 success: false,
                 message: "incorrect password"

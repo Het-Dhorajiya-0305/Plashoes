@@ -4,10 +4,14 @@ import './sidebar.css'
 import { IoIosAddCircle } from "react-icons/io";
 import { FaList } from "react-icons/fa6";
 import { FaCartShopping } from "react-icons/fa6";
+import axios from 'axios';
+import { backEndUrl } from '../../App';
 
 
 
-function Sidebar() {
+function Sidebar({setToken}) {
+
+
     return (
         <div className='sidebar-main-container'>
             <div className='sidebar-container'>
@@ -23,7 +27,7 @@ function Sidebar() {
                         <NavLink to="/admin/orders" className='link'><FaCartShopping size={25} className='icon' /><span>orders</span></NavLink>
                     </div>
                 </div>
-                <button className="login-btn">Log Out</button>
+                <button className="login-btn" onClick={()=>setToken("")}>Log Out</button>
             </div>
         </div>
     )
