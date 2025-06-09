@@ -12,7 +12,7 @@ const addProduct = asyncHandler(async (req, res) => {
 
     const { proName, proPrice, proDescription, proGender, proSize} = req.body;
 
-    console.log(proDescription,proGender,proName,proPrice,proSize)
+    // console.log(proDescription,proGender,proName,proPrice,proSize)
 
     if (!proName || !proPrice || !proDescription || !proGender || !proSize || !proImg) {
         return res.status(400).json({
