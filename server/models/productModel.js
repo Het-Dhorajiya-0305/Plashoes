@@ -14,7 +14,7 @@ const productSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-    gender:{
+    proGender:{
         type:String,
         required:true,
     },
@@ -22,12 +22,12 @@ const productSchema=new mongoose.Schema({
         type:Array,
         required:true,
     },
-    proImage:{
+    proImg:{
         type:String,
         required:true,
     }
 
-},{timestamps:true});
+},{timestamps:true });
 
 const Product=mongoose.model("product",productSchema);
 

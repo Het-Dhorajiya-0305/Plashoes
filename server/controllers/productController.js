@@ -1,7 +1,7 @@
 
 import Product from "../models/productModel.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import {uploadImage, deleteImage } from "../utils/cloudinary.js";
+import { uploadImage, deleteImage } from "../utils/cloudinary.js";
 
 
 
@@ -10,11 +10,11 @@ import {uploadImage, deleteImage } from "../utils/cloudinary.js";
 const addProduct = asyncHandler(async (req, res) => {
 
 
-    const { proName, proPrice, proDescription, proGender, proSize} = req.body;
+    const { proName, proPrice, proDescription, proGender } = req.body;
 
-    // console.log(proDescription,proGender,proName,proPrice,proSize)
+    console.log(proDescription,proGender,proName,proPrice)
 
-    if (!proName || !proPrice || !proDescription || !proGender || !proSize || !proImg) {
+    if (!proName || !proPrice || !proDescription || !proGender) {
         return res.status(400).json({
             success: false,
             message: "please fill all the fields"
@@ -33,6 +33,8 @@ const addProduct = asyncHandler(async (req, res) => {
 
     const imageLocalPath = req.file?.path;
 
+    console.log("image local path : ", imageLocalPath);
+
     if (!imageLocalPath) {
         return res.status(404).json({
             success: false,
@@ -40,7 +42,7 @@ const addProduct = asyncHandler(async (req, res) => {
         })
     }
 
-    const imageUrl = await uploadImage(imageLocalPath,proName);
+    const imageUrl = await uploadImage(imageLocalPath);
 
     if (!imageUrl) {
         res.status(400).json({
@@ -49,15 +51,14 @@ const addProduct = asyncHandler(async (req, res) => {
         })
     }
 
-
-
+    console.log("image url : ", imageUrl.secure_url);
     const product = await Product.create({
         proName,
         proPrice:Number(proPrice),
         proDescription,
         proSize:JSON.parse(proSize),
-        gender,
-        proImage: imageUrl.url
+        proGender,
+        proImg: imageUrl.secure_url
     })
 
     return res.status(200).json({
@@ -69,71 +70,67 @@ const addProduct = asyncHandler(async (req, res) => {
 
 // delete product
 
-const deleteProduct=asyncHandler(async (req,res)=>{
-    
-    const {proName}=req.body;
+const deleteProduct = asyncHandler(async (req, res) => {
 
-    console.log("product name : ",proName);
-    if(!proName)
-    {
+    const { proName } = req.body;
+
+    console.log("product name : ", proName);
+    if (!proName) {
         return res.status(400).json({
-            message:"product name is required",
-            success:false
+            message: "product name is required",
+            success: false
         })
     }
 
-    const existproduct=await Product.findOneAndDelete({proName});
-    console.log("exist product : ",existproduct.proName);
+    const existproduct = await Product.findOneAndDelete({ proName });
+    console.log("exist product : ", existproduct.proName);
 
-    if(!existproduct)
-    {
+    if (!existproduct) {
         return res.status(400).json({
-            message:"product does not exist",
-            success:false
+            message: "product does not exist",
+            success: false
         })
     }
 
-    const deletedImage=deleteImage(proName);
+    const deletedImage = deleteImage(proName);
 
-    if(!deletedImage)
-    {
+    if (!deletedImage) {
         return res.status(400).json({
-            message:"error in deleting image",
-            success:false
+            message: "error in deleting image",
+            success: false
         })
     }
 
 
     return res.status(200).json({
-        message:"product successfully deleted",
-        success:true
+        message: "product successfully deleted",
+        success: true
     })
 
 })
 
-const listProduct=asyncHandler(async (req,res)=>{
-    const productData=await Product.find({});
+const listProduct = asyncHandler(async (req, res) => {
+    const productData = await Product.find({});
     return res.status(200).json({
-        success:true,
+        success: true,
         productData
     })
 })
 
-const singleProduct=asyncHandler(async (req,res)=>{
+const singleProduct = asyncHandler(async (req, res) => {
 
-    const {productId}=req.params;
+    const { productId } = req.params;
 
-    const product=await Product.findById(productId);
+    const product = await Product.findById(productId);
 
-    if(!product)
-    {
+    if (!product) {
         return res.status(500).json({
-            success:false,
-            message:"product does not exist!!"
+            success: false,
+            message: "product does not exist!!"
         })
     }
     return res.status(200).json({
-        success:true,
+        success: true,
         product
     })
 })
@@ -141,4 +138,4 @@ const singleProduct=asyncHandler(async (req,res)=>{
 
 
 
-export { addProduct,deleteProduct,listProduct,singleProduct};
+export { addProduct, deleteProduct, listProduct, singleProduct };

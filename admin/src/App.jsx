@@ -26,7 +26,7 @@ function App() {
         <Sidebar setToken={setToken}></Sidebar>
         <Routes>
           <Route path='/admin/iteamList' element={<Product></Product>}></Route>
-          <Route path='/admin/addIteams' element={<AddIteam></AddIteam>}></Route>
+          <Route path='/admin/addIteams' element={<AddIteam token={token}></AddIteam>}></Route>
           <Route path='/admin/orders' element={<Orders></Orders>}></Route>
         </Routes>
       </>}

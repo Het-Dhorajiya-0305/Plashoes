@@ -5,6 +5,8 @@ const verifyAdmin = async (req, res, next) => {
     try {
         const token = req.cookies?.refreshToken || req.header("token")?.replace("Bearer ", "")
 
+        console.log("token in admin auth middleware : ", token)
+
         if (!token) {
             return res.status(400).json({
                 success: false,

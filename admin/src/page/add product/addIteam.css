@@ -10,12 +10,11 @@
     background-color: white;
 }
 
-.additeam-inner-container form
-{
+.additeam-inner-container form {
     padding: 1% 2%;
 }
-.additeam-inner-container form div
-{
+
+.additeam-inner-container form div {
     margin-bottom: 10px;
 }
 
@@ -55,7 +54,8 @@
     align-items: center;
 }
 
-.product-gender, .product-price {
+.product-gender,
+.product-price {
     padding: 10px 5px;
     width: 8rem;
     border-radius: 5px;
@@ -63,27 +63,31 @@
     font-family: var(--text-font);
     color: var(--font-color);
 }
-.size-inner-cont
-{
+
+.size-inner-cont {
     display: flex;
+    flex-wrap: wrap;
     width: 50%;
     justify-content: space-between;
 }
-.size-inner-cont div
-{
+
+.size-inner-cont .not-in {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid rgba(125, 123, 123, 0.466);
+    width: 3.5rem;
     padding: 10px 8px;
     background-color: rgba(128, 128, 128, 0.326);
     font-family: var(--text-font);
 }
-.size-inner-cont div:hover
-{
+
+.size-inner-cont .not-in:hover {
     border: 1px solid orange;
     cursor: pointer;
 }
 
-.additeam-inner-container .submit-btn
-{
+.additeam-inner-container .submit-btn {
     margin-top: 10px;
     padding: 13px 35px;
     border: none;
@@ -95,12 +99,19 @@
     border-radius: 5px;
     transition: all 0.3s;
 }
-.additeam-inner-container .submit-btn:hover
-{
+
+.additeam-inner-container .submit-btn:hover {
     background-color: rgb(44, 44, 44);
     cursor: pointer;
 }
-.selected-cont
-{
-    background-color: rgb(154, 17, 17);
+
+.selected-cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(125, 123, 123, 0.466);
+    width: 3.5rem;
+    padding: 10px 8px;
+    background-color: rgb(74, 74, 74);
+    color: white;
 }
