@@ -10,11 +10,17 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-const uploadImage = async (localFilePath) => {
+const uploadImage = async (localFilePath,proName) => {
     try {
         if (!localFilePath) return null;
 
-        const response = await cloudinary.uploader.upload(localFilePath, {resource_type:"image",folder: "products"});
+        const response = await cloudinary.uploader.upload(localFilePath,
+            {
+                resource_type: "image",
+                folder: "products",
+                fetch_format: "auto",
+                public_id: `products/${proName}`
+            });
         console.log("file had been uploaded on cloudinary ", response.url);
 
         if (fs.existsSync(localFilePath)) {
@@ -34,12 +40,9 @@ const uploadImage = async (localFilePath) => {
     }
 }
 
-const deleteImage = async (proname) => {
-    try 
-    {
-        const deletedImage=await cloudinary.uploader.destroy(`products/${proname}`,(reult)=>{
-            console.log("image deleted");
-        })
+const deleteImage = async (product) => {
+    try {
+        const deletedImage = await cloudinary.uploader.destroy(`products/${product.proName}`)
         return deletedImage;
 
     }
@@ -49,4 +52,4 @@ const deleteImage = async (proname) => {
     }
 }
 
-export  {uploadImage,deleteImage};
+export { uploadImage, deleteImage };

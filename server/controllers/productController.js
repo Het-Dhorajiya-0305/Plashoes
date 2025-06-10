@@ -9,10 +9,9 @@ import { uploadImage, deleteImage } from "../utils/cloudinary.js";
 
 const addProduct = asyncHandler(async (req, res) => {
 
+    const { proName, proPrice, proDescription, proGender,proSize } = req.body;
 
-    const { proName, proPrice, proDescription, proGender } = req.body;
-
-    console.log(proDescription,proGender,proName,proPrice)
+    console.log(proDescription,proGender,proName,proPrice,proSize)
 
     if (!proName || !proPrice || !proDescription || !proGender) {
         return res.status(400).json({
@@ -72,6 +71,8 @@ const addProduct = asyncHandler(async (req, res) => {
 
 const deleteProduct = asyncHandler(async (req, res) => {
 
+    console.log("delete product request body : ", req.body);
+
     const { proName } = req.body;
 
     console.log("product name : ", proName);
@@ -83,7 +84,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
     }
 
     const existproduct = await Product.findOneAndDelete({ proName });
-    console.log("exist product : ", existproduct.proName);
+    console.log("exist product : ", existproduct);
 
     if (!existproduct) {
         return res.status(400).json({
@@ -92,7 +93,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
         })
     }
 
-    const deletedImage = deleteImage(proName);
+    const deletedImage = deleteImage(existproduct);
 
     if (!deletedImage) {
         return res.status(400).json({

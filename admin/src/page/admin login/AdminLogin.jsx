@@ -24,7 +24,7 @@ function AdminLogin({ setToken }) {
             const response = await axios.post(backEndUrl + "/user/adminlogin", { email, password });
             console.log(response)
             if (response.data.success) {
-                setToken(response.data.token)
+                setToken(response.data.accessToken)
             }
             else
             {

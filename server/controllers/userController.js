@@ -2,6 +2,7 @@ import User from '../models/usermodel.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 import validator from 'validator';
 import jwt from 'jsonwebtoken'
+import bcrypt from 'bcrypt';
 
 const generateAccessAndRefereshTokens = async (userId) => {
     try {
@@ -226,51 +227,29 @@ const changePassword = asyncHandler(async (req, res) => {
 })
 
 const adminLogin = asyncHandler(async (req, res) => {
-
     const { email, password } = req.body;
-    console.log("server data : ", email, password)
 
-    if (!email || !password) {
-        return res.status(404).json({
-            success: false,
-            message: "userName and password are required"
-        })
+    if (email !== process.env.ADMIN_EMAIL) {
+        return res.status(400).json({ success: false, message: 'Invalid email' });
     }
 
-    if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
-        const token = await jwt.sign(
-            {
-                email,
-                password
-            },
-            process.env.REFRESH_TOKEN_SECRET,
-            {
-                expiresIn: process.env.REFRESH_TOKEN_EXPIRY
-            })
-
-
-
-        const option = {
-            httpOnly: true,
-            secure: true
-        }
-
-        return res
-            .status(200)
-            .cookie("refreshToken", token, option)
-            .json({
-                success: true,
-                token
-            })
+    const isPasswordValid = await bcrypt.compare(password, process.env.ADMIN_PASSWORD); // Use hashed password
+    if (!isPasswordValid) {
+        return res.status(400).json({ success: false, message: 'Invalid password' });
     }
-    else
-    {
-        return res.status(400).json({
-            success:false,
-            message:"email and password incorrect!!"
-        })
-    }
-})
+
+    const accessToken = jwt.sign(
+        { email, isAdmin: true },
+        process.env.ACCESSS_TOKEN_SECRET,
+        { expiresIn: '1h' }
+    );
+
+    return res.status(200).json({
+        success: true,
+        message: 'Login successful',
+        accessToken,
+    });
+});
 
 const adminLogOut = asyncHandler(async (req, res) => {
     const option = {
