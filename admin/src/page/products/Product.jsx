@@ -65,16 +65,16 @@ useEffect(()=>{
           <div className="image-heading"></div>
           <div className="name-heading">name</div>
           <div className="price-heading">price</div>
-          <div className="stock-heading">stock</div>
+          <div className="stock-heading">Gender</div>
           <div className="delete-heading"></div>
         </div>
         <div className="iteam-list">
           {productList.map((iteam, index) => (
             <div className="iteam-list-container" key={index}>
-              <div className="iteam-image"><img src={iteam.proImage} alt="not found" /></div>
+              <div className="iteam-image"><img src={iteam.proImg } alt="not found" /></div>
               <div className="iteam-name">{iteam.proName}</div>
               <div className="iteam-price"><FaIndianRupeeSign className='rupees' size={18} />{iteam.proPrice}</div>
-              <div className="iteam-stock">{iteam.proStock}</div>
+              <div className="iteam-stock">{iteam.proGender}</div>
               <div className="delete-btn" onClick={(e) => { deleteproduct(e, iteam.proName) }}><MdDelete size={30} /></div>
             </div>
           ))}

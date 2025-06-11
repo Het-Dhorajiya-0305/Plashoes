@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from 'cloudinary';
 import fs from 'fs';
 import dotenv from 'dotenv';
+import { extractPublicId } from 'cloudinary-build-url';
 
 dotenv.config();
 
@@ -10,7 +11,7 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-const uploadImage = async (localFilePath,proName) => {
+const uploadImage = async (localFilePath) => {
     try {
         if (!localFilePath) return null;
 
@@ -19,7 +20,6 @@ const uploadImage = async (localFilePath,proName) => {
                 resource_type: "image",
                 folder: "products",
                 fetch_format: "auto",
-                public_id: `products/${proName}`
             });
         console.log("file had been uploaded on cloudinary ", response.url);
 
@@ -42,11 +42,19 @@ const uploadImage = async (localFilePath,proName) => {
 
 const deleteImage = async (product) => {
     try {
-        const deletedImage = await cloudinary.uploader.destroy(`products/${product.proName}`)
+        const publicId = extractPublicId(product.proImg);
+        if (!publicId) {
+            console.log("No public ID found for the image.");
+            return null;
+        }
+
+        const deletedImage = await cloudinary.uploader.destroy(publicId)
+
         return deletedImage;
 
     }
     catch (error) {
+        alert("error in deleting image",error.message);
         console.log("error in deleting image :", error);
         return null;
     }

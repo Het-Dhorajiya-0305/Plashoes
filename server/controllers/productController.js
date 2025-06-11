@@ -9,11 +9,11 @@ import { uploadImage, deleteImage } from "../utils/cloudinary.js";
 
 const addProduct = asyncHandler(async (req, res) => {
 
-    const { proName, proPrice, proDescription, proGender,proSize } = req.body;
+    const { proName, proPrice, proDescription, proGender,proSize,bestSeller,newArrival } = req.body;
 
     console.log(proDescription,proGender,proName,proPrice,proSize)
 
-    if (!proName || !proPrice || !proDescription || !proGender) {
+    if (!proName || !proPrice || !proDescription || !proGender ) {
         return res.status(400).json({
             success: false,
             message: "please fill all the fields"
@@ -41,41 +41,83 @@ const addProduct = asyncHandler(async (req, res) => {
         })
     }
 
-    const imageUrl = await uploadImage(imageLocalPath);
+    // const imageUrl = await uploadImage(imageLocalPath);
 
-    if (!imageUrl) {
-        res.status(400).json({
+    // if (!imageUrl) {
+    //     res.status(400).json({
+    //         success: false,
+    //         message: "image upload failed"
+    //     })
+    // }
+
+    // console.log("image url : ", imageUrl.secure_url);
+    // const product = await Product.create({
+    //     proName,
+    //     proPrice:Number(proPrice),
+    //     proDescription,
+    //     proSize:JSON.parse(proSize),
+    //     proGender,
+    //     proImg: imageUrl.secure_url,
+    //     bestSeller: bestSeller === "true" ? true : false,
+    //     newArrival: newArrival === "true" ? true : false
+    // })
+
+    // return res.status(200).json({
+    //     success: true,
+    //     message: "product added successfully",
+    //     product
+    // })
+
+    try {
+        // Upload image to Cloudinary with a timeout (e.g., 30 seconds)
+        const imageUploadPromise = uploadImage(imageLocalPath);
+        const timeoutPromise = new Promise((_, reject) => {
+            setTimeout(() => reject(new Error("Image upload timed out")), 30000);
+        });
+
+        const imageUrl = await Promise.race([imageUploadPromise, timeoutPromise]);
+
+        if (!imageUrl || !imageUrl.secure_url) {
+            return res.status(400).json({
+                success: false,
+                message: "Image upload failed",
+            });
+        }
+
+        console.log("Image URL: ", imageUrl.secure_url);
+
+        // Create product only after successful image upload
+        const product = await Product.create({
+            proName,
+            proPrice: Number(proPrice),
+            proDescription,
+            proSize: JSON.parse(proSize),
+            proGender,
+            proImg: imageUrl.secure_url,
+            bestSeller: bestSeller === "true",
+            newArrival: newArrival === "true",
+        });
+
+        return res.status(200).json({
+            success: true,
+            message: "Product added successfully",
+            product,
+        });
+    } catch (error) {
+        console.error("Error during image upload or product creation:", error);
+        return res.status(500).json({
             success: false,
-            message: "image upload failed"
-        })
+            message: `Failed to add product: ${error.message}`,
+        });
     }
-
-    console.log("image url : ", imageUrl.secure_url);
-    const product = await Product.create({
-        proName,
-        proPrice:Number(proPrice),
-        proDescription,
-        proSize:JSON.parse(proSize),
-        proGender,
-        proImg: imageUrl.secure_url
-    })
-
-    return res.status(200).json({
-        success: true,
-        message: "product added successfully",
-        product
-    })
 })
 
 // delete product
 
 const deleteProduct = asyncHandler(async (req, res) => {
 
-    console.log("delete product request body : ", req.body);
-
     const { proName } = req.body;
 
-    console.log("product name : ", proName);
     if (!proName) {
         return res.status(400).json({
             message: "product name is required",
@@ -84,7 +126,6 @@ const deleteProduct = asyncHandler(async (req, res) => {
     }
 
     const existproduct = await Product.findOneAndDelete({ proName });
-    console.log("exist product : ", existproduct);
 
     if (!existproduct) {
         return res.status(400).json({
@@ -93,7 +134,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
         })
     }
 
-    const deletedImage = deleteImage(existproduct);
+    const deletedImage =await deleteImage(existproduct);
 
     if (!deletedImage) {
         return res.status(400).json({
@@ -101,7 +142,6 @@ const deleteProduct = asyncHandler(async (req, res) => {
             success: false
         })
     }
-
 
     return res.status(200).json({
         message: "product successfully deleted",

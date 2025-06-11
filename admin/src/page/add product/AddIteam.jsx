@@ -8,11 +8,15 @@ function AddIteam({ token }) {
 
   const [proImg, setProImg] = useState(false);
 
+  const [newArrival,setNewArrival]= useState(false);
+  const[bestSeller,setBestSeller]= useState(false);
+
   const [proName, setProName] = useState('');
   const [proDescription, setProDescription] = useState("");
   const [proPrice, setProPrice] = useState('')
   const [proGender, setProGender] = useState("male");
   const [proSize, setProSize] = useState([]);
+
 
   useEffect(() => {
     console.log(proSize)
@@ -42,13 +46,15 @@ function AddIteam({ token }) {
       formData.append('proPrice', proPrice);
       formData.append('proImg', proImg);
       formData.append('proSize', JSON.stringify(proSize));
+      formData.append('newArrival', newArrival);
+      formData.append('bestSeller', bestSeller);
 
       console.log('Sending request with formData:', formData);
 
       const response = await axios.post(`${backEndUrl}/product/addproduct`, formData, {
         headers: {
-          Authorization: `Bearer ${token}`, // Send token in Authorization header
-          'Content-Type': 'multipart/form-data', // Required for FormData
+          Authorization: `Bearer ${token}`, 
+          'Content-Type': 'multipart/form-data',
         },
       });
 
@@ -61,6 +67,8 @@ function AddIteam({ token }) {
       setProPrice('');
       setProGender('male');
       setProSize([]);
+      setNewArrival(false); 
+      setBestSeller(false);
     } catch (error) {
       console.error('Error adding product:', error.response?.data || error.message);
       alert(`Failed to add product: ${error.response?.data?.message || 'Server error'}`);
@@ -110,6 +118,16 @@ function AddIteam({ token }) {
               <div className={proSize.includes("10UK") ? "selected-cont" : "not-in"} onClick={() => setProSize(pre => pre.includes("10UK") ? pre.filter((iteam) => iteam != "10UK") : [...proSize, "10UK"])}><p className="size">10UK</p></div>
               <div className={proSize.includes("11UK") ? "selected-cont" : "not-in"} onClick={() => setProSize(pre => pre.includes("11UK") ? pre.filter((iteam) => iteam != "11UK") : [...proSize, "11UK"])}><p className="size">11UK</p></div>
               <div className={proSize.includes("12UK") ? "selected-cont" : "not-in"} onClick={() => setProSize(pre => pre.includes("12UK") ? pre.filter((iteam) => iteam != "12UK") : [...proSize, "12UK"])}><p className="size">12UK</p></div>
+            </div>
+          </div>
+          <div className="best-new-arrival">
+            <div className="new-arrival">
+              <p className='label'>New Arrival</p>
+              <input type="checkbox" onChange={()=>setNewArrival(!newArrival)} value={newArrival} checked={newArrival}/>
+            </div>
+            <div className="best-seller">
+              <p className='label'>Best Seller</p>
+              <input type="checkbox" onChange={()=>setBestSeller(!bestSeller)} value={bestSeller} checked={bestSeller}/>
             </div>
           </div>
           <div className="submit-btn-cont">

@@ -25,7 +25,16 @@ const productSchema=new mongoose.Schema({
     proImg:{
         type:String,
         required:true,
+    },
+    bestSeller:{
+        type:Boolean,
+        default:false
     }
+    ,newArrival:{
+        type:Boolean,
+        default:false
+    }
+
 
 },{timestamps:true });
 
