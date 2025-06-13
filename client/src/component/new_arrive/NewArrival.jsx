@@ -13,10 +13,8 @@ function NewArrival() {
         const fetchNewArrival = async () => {
             try {
                 const response = await axios.get(`${backEndUrl}/product/listproduct`)
-                console.log(response)
                 if (response.data.success) {
                     const arr = response.data.productData.filter((iteam) => iteam.newArrival === true)
-                    console.log(arr)
                     setNewArrival(arr);
                 }
                 else {
@@ -38,7 +36,7 @@ function NewArrival() {
                 <div className="iteam_list">
                     {new_arrival.map((iteam) => (
                         <div className="iteam1 iteam" key={iteam._id}>
-                            <NavLink to="/product/male/1">
+                            <NavLink to={`/product/${iteam._id}`}>
                                 <img src={iteam.proImg} alt="" />
                             </NavLink>
                             <h2>{iteam.proName}</h2>

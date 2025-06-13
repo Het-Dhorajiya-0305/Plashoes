@@ -4,7 +4,6 @@ import './product.css'
 import { FaRupeeSign } from "react-icons/fa";
 import { useParams } from 'react-router-dom'
 import { StoreContext } from '../../context/StoreContext';
-import defaultarray from '../../component/Defaultarray';
 import axios from 'axios';
 import { backEndUrl } from '../../App';
 
@@ -12,13 +11,16 @@ import { backEndUrl } from '../../App';
 function Product() {
   const { pro_id } = useParams();
   const { addToCart, cartItems } = useContext(StoreContext)
-  const [size, setSize] = useState("6 UK")
+  const [size, setSize] = useState([])
   const [productDetail, setProductDetail] = useState({});
+  const [sizeContainer, setSizeContainer] = useState([]); 
+
+
+
   useEffect(() => {
     const fetchProductDetail = async () => {
       try {
         const response = await axios.get(`${backEndUrl}/product/${pro_id}`)
-        console.log(response)
         if (response.data.success) {
           setProductDetail(response.data.product);
         }
@@ -34,11 +36,32 @@ function Product() {
       }
     }
     fetchProductDetail();
+
   }, []);
 
-  console.log("productDetail", productDetail)
 
 
+  useEffect(() => {
+    if (productDetail && Array.isArray(productDetail.proSize)) {
+      const sizes = productDetail.proSize.map((iteam,index) => (
+        <div key={index} className={size.includes(iteam) ? "selected-cont" : "not-in"} onClick={()=>sizeOnClick(iteam)}><p className="size">{iteam}</p></div>
+      ));
+      setSizeContainer(sizes);
+    } else {
+      setSizeContainer([]); // Reset if proSize is not an array
+    }
+  }, [productDetail, size]);
+
+
+const sizeOnClick = (item) => {
+    setSize((prevSizes) => {
+      if (prevSizes.includes(item)) {
+        return prevSizes.filter((it) => it !== item);
+      } else {
+        return [...prevSizes, item];
+      }
+    });
+  };
 
 
 
@@ -66,18 +89,13 @@ function Product() {
             <div className="description">
               {productDetail.proDescription}
             </div>
-            <div className="add-to-cart">
-              <div className="size-cont">
-                <p className='label'>Size</p>
-                <div className="size-inner-cont">
-                  {productDetail.proSize.map((iteam)=>(
-                    <div className={productDetail.proSize.includes(iteam) ? "selected-cont" : "not-in"} onClick={() => setProSize(pre => pre.includes(iteam) ? pre.filter((it) => it != iteam) : [...proSize, iteam])}><p className="size">{iteam}</p></div>
-                  ))}d
-                </div>
+            <div className="size-cont">
+              <div className="size-inner-cont">
+                {sizeContainer}
               </div>
-              <div className="add-to-cart-btn">
-                <button onClick={() => addToCart(product, size)}>add to cart</button>
-              </div>
+            </div>
+            <div className="add-to-cart-btn">
+              <button onClick={() => addToCart(product, size)}>add to cart</button>
             </div>
           </div>
         </div>
