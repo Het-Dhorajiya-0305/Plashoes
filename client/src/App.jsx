@@ -29,7 +29,7 @@ function App() {
           <Route path='/contactus' element={<ContactUs />}></Route>
           <Route path='/user/register' element={<SingIn />}></Route>
           <Route path='/cart' element={<Cart />}></Route>
-          <Route path='/product/:gender/:pro_id' element={<Product />}></Route>
+          <Route path='/product/:pro_id' element={<Product />}></Route>
           <Route path='/checkout' element={<CheckOut></CheckOut>}></Route>
         </Routes>
       </div>

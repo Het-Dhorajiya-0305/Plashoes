@@ -5,22 +5,44 @@ import { FaRupeeSign } from "react-icons/fa";
 import { useParams } from 'react-router-dom'
 import { StoreContext } from '../../context/StoreContext';
 import defaultarray from '../../component/Defaultarray';
+import axios from 'axios';
+import { backEndUrl } from '../../App';
 
 
 function Product() {
-  const { pro_id, gender } = useParams();
-  const {addToCart,cartItems} =useContext(StoreContext)
-  const [size,setSize]=useState("6 UK")
+  const { pro_id } = useParams();
+  const { addToCart, cartItems } = useContext(StoreContext)
+  const [size, setSize] = useState("6 UK")
+  const [productDetail, setProductDetail] = useState({});
+  useEffect(() => {
+    const fetchProductDetail = async () => {
+      try {
+        const response = await axios.get(`${backEndUrl}/product/${pro_id}`)
+        console.log(response)
+        if (response.data.success) {
+          setProductDetail(response.data.product);
+        }
+        else {
+          console.log("error in fetching product detail", response.data.message)
+          alert("error in fetching product detail", response.data.message)
+          return;
+        }
+      } catch (error) {
+        console.log("error in fetching product detail", error.message);
+        alert("error in fetching product detail", error.message);
+        return;
+      }
+    }
+    fetchProductDetail();
+  }, []);
 
-  useEffect(()=>{
-    console.log(size)
-  },[size]);
+  console.log("productDetail", productDetail)
 
-  const arr=defaultarray("");
 
-  const product = arr.find((item) => item.id === pro_id && item.gender === gender);
 
-  if (!product) {
+
+
+  if (!productDetail) {
     return (
       <div className='product-main-container'>
         {/* <Navbar /> */}
@@ -36,28 +58,25 @@ function Product() {
       <div className="product-inner-container">
         <div className="product-detail-container">
           <div className="product-image">
-            <img src={product.loc} alt={product.name} />
+            <img src={productDetail.proImg} alt={productDetail.proName} />
           </div>
           <div className="product-detail">
-            <h2 className='product-name'>{product.name}</h2>
-            <h2 className='rupee'><FaRupeeSign />{product.price}</h2>
+            <h2 className='product-name'>{productDetail.proName}</h2>
+            <h2 className='rupee'><FaRupeeSign />{productDetail.proPrice}</h2>
             <div className="description">
-              {product.description}
+              {productDetail.proDescription}
             </div>
             <div className="add-to-cart">
-              <div className="product-size">
-                <select className='size-selector' name="" id="" onChange={(e)=>setSize(e.target.value)}>
-                  <option value="6 UK">6 UK</option>
-                  <option value="7 UK">7 UK</option>
-                  <option value="8 UK">8 UK</option>
-                  <option value="9 UK">9 UK</option>
-                  <option value="10 UK">10 UK</option>
-                  <option value="11 UK">11 UK</option>
-                  <option value="12 UK">12 UK</option>
-                </select>
+              <div className="size-cont">
+                <p className='label'>Size</p>
+                <div className="size-inner-cont">
+                  {productDetail.proSize.map((iteam)=>(
+                    <div className={productDetail.proSize.includes(iteam) ? "selected-cont" : "not-in"} onClick={() => setProSize(pre => pre.includes(iteam) ? pre.filter((it) => it != iteam) : [...proSize, iteam])}><p className="size">{iteam}</p></div>
+                  ))}d
+                </div>
               </div>
               <div className="add-to-cart-btn">
-                <button onClick={()=>addToCart(product,size)}>add to cart</button>
+                <button onClick={() => addToCart(product, size)}>add to cart</button>
               </div>
             </div>
           </div>
