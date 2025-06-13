@@ -41,75 +41,75 @@ const addProduct = asyncHandler(async (req, res) => {
         })
     }
 
-    // const imageUrl = await uploadImage(imageLocalPath);
+    const imageUrl = await uploadImage(imageLocalPath);
 
-    // if (!imageUrl) {
-    //     res.status(400).json({
-    //         success: false,
-    //         message: "image upload failed"
-    //     })
-    // }
-
-    // console.log("image url : ", imageUrl.secure_url);
-    // const product = await Product.create({
-    //     proName,
-    //     proPrice:Number(proPrice),
-    //     proDescription,
-    //     proSize:JSON.parse(proSize),
-    //     proGender,
-    //     proImg: imageUrl.secure_url,
-    //     bestSeller: bestSeller === "true" ? true : false,
-    //     newArrival: newArrival === "true" ? true : false
-    // })
-
-    // return res.status(200).json({
-    //     success: true,
-    //     message: "product added successfully",
-    //     product
-    // })
-
-    try {
-        // Upload image to Cloudinary with a timeout (e.g., 30 seconds)
-        const imageUploadPromise = uploadImage(imageLocalPath);
-        const timeoutPromise = new Promise((_, reject) => {
-            setTimeout(() => reject(new Error("Image upload timed out")), 30000);
-        });
-
-        const imageUrl = await Promise.race([imageUploadPromise, timeoutPromise]);
-
-        if (!imageUrl || !imageUrl.secure_url) {
-            return res.status(400).json({
-                success: false,
-                message: "Image upload failed",
-            });
-        }
-
-        console.log("Image URL: ", imageUrl.secure_url);
-
-        // Create product only after successful image upload
-        const product = await Product.create({
-            proName,
-            proPrice: Number(proPrice),
-            proDescription,
-            proSize: JSON.parse(proSize),
-            proGender,
-            proImg: imageUrl.secure_url,
-            bestSeller: bestSeller === "true",
-            newArrival: newArrival === "true",
-        });
-
-        return res.status(200).json({
-            success: true,
-            message: "Product added successfully",
-            product,
-        });
-    } catch (error) {
-        console.error("Error during image upload or product creation:", error);
-        return res.status(500).json({
+    if (!imageUrl) {
+        res.status(400).json({
             success: false,
-            message: `Failed to add product: ${error.message}`,
-        });
+            message: "image upload failed"
+        })
     }
+
+    console.log("image url : ", imageUrl.secure_url);
+    const product = await Product.create({
+        proName,
+        proPrice:Number(proPrice),
+        proDescription,
+        proSize:JSON.parse(proSize),
+        proGender,
+        proImg: imageUrl.secure_url,
+        bestSeller: bestSeller === "true" ? true : false,
+        newArrival: newArrival === "true" ? true : false
+    })
+
+    return res.status(200).json({
+        success: true,
+        message: "product added successfully",
+        product
+    })
+
+    // try {
+    //     // Upload image to Cloudinary with a timeout (e.g., 30 seconds)
+    //     const imageUploadPromise = uploadImage(imageLocalPath);
+    //     const timeoutPromise = new Promise((_, reject) => {
+    //         setTimeout(() => reject(new Error("Image upload timed out")), 30000);
+    //     });
+
+    //     const imageUrl = await Promise.race([imageUploadPromise, timeoutPromise]);
+
+    //     if (!imageUrl || !imageUrl.secure_url) {
+    //         return res.status(400).json({
+    //             success: false,
+    //             message: "Image upload failed",
+    //         });
+    //     }
+
+    //     console.log("Image URL: ", imageUrl.secure_url);
+
+    //     // Create product only after successful image upload
+    //     const product = await Product.create({
+    //         proName,
+    //         proPrice: Number(proPrice),
+    //         proDescription,
+    //         proSize: JSON.parse(proSize),
+    //         proGender,
+    //         proImg: imageUrl.secure_url,
+    //         bestSeller: bestSeller === "true",
+    //         newArrival: newArrival === "true",
+    //     });
+
+    //     return res.status(200).json({
+    //         success: true,
+    //         message: "Product added successfully",
+    //         product,
+    //     });
+    // } catch (error) {
+    //     console.error("Error during image upload or product creation:", error);
+    //     return res.status(500).json({
+    //         success: false,
+    //         message: `Failed to add product: ${error.message}`,
+    //     });
+    // }
 })
 
 // delete product
