@@ -10,10 +10,9 @@ import { backEndUrl } from '../../App';
 
 function Product() {
   const { pro_id } = useParams();
-  const { addToCart, cartItems } = useContext(StoreContext)
   const [size, setSize] = useState([])
   const [productDetail, setProductDetail] = useState({});
-  const [sizeContainer, setSizeContainer] = useState([]); 
+  const [sizeContainer, setSizeContainer] = useState([]);
 
 
 
@@ -43,17 +42,16 @@ function Product() {
 
   useEffect(() => {
     if (productDetail && Array.isArray(productDetail.proSize)) {
-      const sizes = productDetail.proSize.map((iteam,index) => (
-        <div key={index} className={size.includes(iteam) ? "selected-cont" : "not-in"} onClick={()=>sizeOnClick(iteam)}><p className="size">{iteam}</p></div>
+      const sizes = productDetail.proSize.map((iteam, index) => (
+        <div key={index} className={size.includes(iteam) ? "selected-cont" : "not-in"} onClick={() => sizeOnClick(iteam)}><p className="size">{iteam}</p></div>
       ));
       setSizeContainer(sizes);
     } else {
-      setSizeContainer([]); // Reset if proSize is not an array
+      setSizeContainer([]);
     }
   }, [productDetail, size]);
 
-
-const sizeOnClick = (item) => {
+  const sizeOnClick = (item) => {
     setSize((prevSizes) => {
       if (prevSizes.includes(item)) {
         return prevSizes.filter((it) => it !== item);
@@ -63,6 +61,32 @@ const sizeOnClick = (item) => {
     });
   };
 
+  
+  const addToCart = async (e) => {
+    e.preventDefault();
+    try {
+      if (size.length === 0) {
+        alert("please select the product size!!")
+        return;
+      }
+      else
+      {
+        const formData=new FormData();
+
+        formData.append("proName", productDetail.proName);
+        formData.append("proSize",size);
+        formData.append("proDetails",JSON.stringify(productDetail))
+
+        const response=await axios.post(`${backEndUrl}/cartIteam/addtocart`,formData)
+
+        console.log(response.data);
+      }
+
+    } catch (error) {
+      console.log("error in adding product to cart", error.message);
+    }
+
+  }
 
 
   if (!productDetail) {
@@ -95,7 +119,7 @@ const sizeOnClick = (item) => {
               </div>
             </div>
             <div className="add-to-cart-btn">
-              <button onClick={() => addToCart(product, size)}>add to cart</button>
+              <button onClick={addToCart}>add to cart</button>
             </div>
           </div>
         </div>
