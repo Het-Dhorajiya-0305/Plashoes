@@ -12,7 +12,7 @@ function Shopping({category}) {
     useEffect(()=>{
         const fetchdata=async()=>{
             try {
-                const response=await axios.get(`${backEndUrl}/product/listproduct`)
+                const response=await axios.get(`${backEndUrl}/api/product/listproduct`)
                 if(response.data.success)
                 {
                     if(category==='male')

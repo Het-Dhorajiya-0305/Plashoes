@@ -12,7 +12,7 @@ function NewArrival() {
     useEffect(() => {
         const fetchNewArrival = async () => {
             try {
-                const response = await axios.get(`${backEndUrl}/product/listproduct`)
+                const response = await axios.get(`${backEndUrl}/api/product/listproduct`)
                 if (response.data.success) {
                     const arr = response.data.productData.filter((iteam) => iteam.newArrival === true)
                     setNewArrival(arr);

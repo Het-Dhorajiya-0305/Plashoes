@@ -19,7 +19,7 @@ function Product() {
   useEffect(() => {
     const fetchProductDetail = async () => {
       try {
-        const response = await axios.get(`${backEndUrl}/product/${pro_id}`)
+        const response = await axios.get(`${backEndUrl}/api/product/${pro_id}`)
         if (response.data.success) {
           setProductDetail(response.data.product);
         }
@@ -61,33 +61,35 @@ function Product() {
     });
   };
 
-  
+
   const addToCart = async (e) => {
     e.preventDefault();
     try {
       if (size.length === 0) {
-        alert("please select the product size!!")
+        alert("Please select at least one product size!");
         return;
       }
-      else
-      {
-        const formData=new FormData();
 
-        formData.append("proName", productDetail.proName);
-        formData.append("proSize",size);
-        formData.append("proDetails",JSON.stringify(productDetail))
+      // Send JSON instead of FormData for simplicity
+      const payload = {
+        proName: productDetail.proName,
+        proSize: size, // Send as array
+        proDetails: productDetail,
+      };
 
-        const response=await axios.post(`${backEndUrl}/cartIteam/addtocart`,formData)
+      const response = await axios.post(`${backEndUrl}/api/cartIteam/addtocart`, payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-        console.log(response.data);
-      }
-
+      console.log("Add to cart response:", response.data);
+      alert("Product added to cart successfully!");
     } catch (error) {
-      console.log("error in adding product to cart", error.message);
+      console.error("Error adding product to cart:", error.response?.data || error.message);
+      alert(`Error adding product to cart: ${error.response?.data?.message || error.message}`);
     }
-
-  }
-
+  };
 
   if (!productDetail) {
     return (

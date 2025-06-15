@@ -14,7 +14,7 @@ import { StoreContext } from '../../context/StoreContext.jsx';
 
 function SingIn() {
 
-    const {navigate}=useContext(StoreContext);
+    const { navigate } = useContext(StoreContext);
 
     const [passwordLogin, setPasswordLogin] = useState(false);
     const [passwordSignUp, setPasswordSignUp] = useState(false);
@@ -23,23 +23,23 @@ function SingIn() {
     const [signUpUserName, setSignUpUserName] = useState('');
     const [loginCriteria, setLoginCriteria] = useState('');
     const [signUpEmail, setSignUpEmail] = useState('');
-    const [signUpPassword,setSignUpPassword]=useState('');
-    const [loginPassword,setLoginPassword]=useState('');
+    const [signUpPassword, setSignUpPassword] = useState('');
+    const [loginPassword, setLoginPassword] = useState('');
 
 
     const showPasswordLogin = () => {
-        setPasswordLogin(Pre=>!Pre)
+        setPasswordLogin(Pre => !Pre)
     }
     const showPasswordSingUp = () => {
-        setPasswordSignUp(Pre=>!Pre)
+        setPasswordSignUp(Pre => !Pre)
     }
 
-    const onSignInSubmit=(e)=>{
+    const onSignInSubmit = (e) => {
         e.preventDefault();
         setSignUpPassword('');
         setSignUpEmail('');
         setSignUpUserName('');
-    
+
         // try {
         //     const formData=new FormData();
 
@@ -51,13 +51,35 @@ function SingIn() {
 
 
         // } catch (error) {
-            
+
         // }
     }
 
-    const onLoginSubmit=(e)=>{
+    const onLoginSubmit = async (e) => {
         e.preventDefault()
-        navigate('/')
+        try {
+            const payload = {
+                loginCriteria: loginCriteria,
+                loginPassword: loginPassword
+            }
+            const response = await axios.post(`${backEndUrl}/api/user/login`, payload, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            if (response.data.success) {
+                setLoginCriteria('');
+                setLoginPassword('');
+                navigate('/');
+            }
+            else
+            {
+                console.log("error in login ",response.data.message);
+            }
+        } catch (error) {
+            alert("error in login ",error.message)
+            console.log("error in login ",error.message)
+        }
     }
 
     return (
@@ -71,15 +93,15 @@ function SingIn() {
                         <label>Username </label></div>
                     <div className="inputForm">
                         <FaUser />
-                        <input required onChange={(e)=>setLoginCriteria(e.target.value)} value={loginCriteria} type="text" className="input" placeholder="Enter your Username/Email" />
+                        <input required onChange={(e) => setLoginCriteria(e.target.value)} value={loginCriteria} type="text" className="input" placeholder="Enter your Username/Email" />
                     </div>
                     <div className="flex-column">
                         <label>Password </label></div>
                     <div className="inputForm">
                         <FaLock />
-                        <input required onChange={(e)=>setLoginPassword(e.target.value)} value={loginPassword} type={passwordLogin ? "text" : "password"} className="input" placeholder="Enter your Password" />
+                        <input required onChange={(e) => setLoginPassword(e.target.value)} value={loginPassword} type={passwordLogin ? "text" : "password"} className="input" placeholder="Enter your Password" />
                         <span onClick={showPasswordLogin}>
-                        {passwordLogin?( <FaEyeSlash size={20}/>):(<FaEye size={20}  />)} 
+                            {passwordLogin ? (<FaEyeSlash size={20} />) : (<FaEye size={20} />)}
                         </span>
                     </div>
                     <div className="flex-row">
@@ -96,21 +118,21 @@ function SingIn() {
                         <label>Username </label></div>
                     <div className="inputForm">
                         <FaUser />
-                        <input required onChange={(e)=>setSignUpUserName(e.target.value)} value={signUpUserName} type="text" className="input" placeholder="Enter your Username" />
+                        <input required onChange={(e) => setSignUpUserName(e.target.value)} value={signUpUserName} type="text" className="input" placeholder="Enter your Username" />
                     </div>
                     <div className="flex-column">
                         <label>Email </label></div>
                     <div className="inputForm">
                         <IoMdMail size={18} />
-                        <input required onChange={(e)=>setSignUpEmail(e.target.value)} value={signUpEmail} type="email" className="input" placeholder="Enter your Email" />
+                        <input required onChange={(e) => setSignUpEmail(e.target.value)} value={signUpEmail} type="email" className="input" placeholder="Enter your Email" />
                     </div>
                     <div className="flex-column">
                         <label>Password </label></div>
                     <div className="inputForm">
                         <FaLock />
-                        <input required onChange={(e)=>setSignUpPassword(e.target.value)} value={signUpPassword} tygn={passwordSignUp ? "text" : "password"} className="input" placeholder="Enter your Password" />
+                        <input required onChange={(e) => setSignUpPassword(e.target.value)} value={signUpPassword} tygn={passwordSignUp ? "text" : "password"} className="input" placeholder="Enter your Password" />
                         <span onClick={showPasswordSingUp}>
-                           {passwordSignUp?( <FaEyeSlash size={20}/>):(<FaEye size={20}  />)} 
+                            {passwordSignUp ? (<FaEyeSlash size={20} />) : (<FaEye size={20} />)}
                         </span>
                     </div>
                     <div className="flex-row">

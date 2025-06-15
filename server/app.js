@@ -13,9 +13,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(express.static("public"))
 
-app.use('/user', userRoutes)
-app.use('/product', productRoutes);
-app.use('/cartIteam',cartIteamRoutes)
+app.use('/api/user', userRoutes)
+app.use('/api/product', productRoutes);
+app.use('/api/cartIteam',cartIteamRoutes)
 
 
 export default app;

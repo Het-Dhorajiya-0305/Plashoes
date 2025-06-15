@@ -12,7 +12,7 @@ function Seller() {
     useEffect(() => {
         const fetchBestSeller = async () => {
             try {
-                const response = await axios.get(`${backEndUrl}/product/listproduct`);
+                const response = await axios.get(`${backEndUrl}/api/product/listproduct`);
                 console.log(response)
                 if (response.data.success) {
                     const arr = response.data.productData.filter((iteam) => iteam.bestSeller === true);
