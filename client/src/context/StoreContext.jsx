@@ -42,6 +42,12 @@ const StoreContextProvider = (props) => {
         getCartCount();
     }, [cartData])
 
+      useEffect(() => {
+          if(token){
+              fetchCartData();
+          }
+    }, [token])
+
 
     const addToCart = async (size, productDetail) => {
         try {
