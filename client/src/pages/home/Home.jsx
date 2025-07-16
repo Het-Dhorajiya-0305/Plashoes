@@ -14,11 +14,6 @@ import { StoreContext } from '../../context/StoreContext.jsx'
 
 function Home() {
 
-    const { fetchCartData } = useContext(StoreContext);
-    useEffect(() => {
-        fetchCartData();
-    }, [])
-
     return (
         <div>
             {/* <Navbar page="home"></Navbar> */}
