@@ -1,0 +1,158 @@
+.shopping-main-container {
+    background-color: #e9eae9c9;
+    margin-top: 80px;
+    width: 100%;
+    height: 100%;
+    padding: 30px 8%;
+
+}
+
+#men_box {
+    height: 100%;
+}
+
+#women_box {
+    height: 100%;
+}
+
+.shopping_content {
+    background-color: white;
+    padding: 2rem 4%;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.shopping-main-container .heading {
+    text-transform: capitalize;
+    color: #607260;
+    font-size: 45px;
+    margin-bottom: 20px;
+}
+
+.shopping {
+    display: grid;
+    width: 100%;
+    gap: 20px; 
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.shopping img {
+    width: 100%;
+    height: 75%;
+    transition: all 0.6s;
+}
+
+.shopping img:hover {
+    box-shadow: 0px 15px 18px -5px rgba(0, 0, 0, 0.58);
+    transform: translateY(-10px);
+
+}
+
+.iteam_shoppping {
+    text-align: center;
+    margin: 10px;
+
+}
+
+.iteam_shopping h2 {
+    margin: 15px 0px;
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.iteam_shopping span {
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    font-size: 18px;
+    color: #979a9b;
+}
+
+.price span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rupees {
+    color: #979a9b;
+    height: 0.8em;
+    width: 0.8em;
+}
+
+@media screen and (max-width: 1350px) {
+    .shopping-main-container{
+        padding: 30px 6%;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .shopping-main-container {
+        padding: 30px 4%;
+    }
+
+    .shopping img {
+        width: 100%;
+        height: 70%;
+    }
+
+    .iteam_shopping h2  {
+        font-size: 18px;
+    }
+
+    .iteam_shopping span{
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .shopping-main-container {
+        padding: 30px 2.5%;
+    }
+
+    .shopping img {
+        width: 100%;
+        height: 70%;
+    }
+
+    .iteam_shopping h2  {
+        font-size: 17px;
+    }
+
+    .iteam_shopping span{
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .shopping-main-container .heading  {
+        font-size: 35px;
+    }
+
+    .iteam_shopping h2 {
+        font-size: 15px;
+        font-weight: 600;
+    }
+    .iteam_shopping span {
+        font-size: 15px;
+    }
+}
+
+
+@media screen and (max-width: 640px) {
+
+    .shopping {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+@media screen and (max-width: 500px) {
+    .iteam_shopping h2
+    {
+        font-size: 14px;
+    }
+
+}

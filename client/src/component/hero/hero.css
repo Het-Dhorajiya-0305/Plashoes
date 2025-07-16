@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.home {
+    width: 94%;
+    height: 100vh;
+    background: url(../../assets/main_bg.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-origin: content-box, padding-box;
+    margin: 0px auto;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 20px 5%;
+}
+
+.text_con {
+    color: white;
+    width: fit-content;
+    line-height: 1.3;
+    height: 50%;
+    margin-top: 11rem;
+
+}
+
+.text_con h1 {
+    width: 40rem;
+    font-size: 72px;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+}
+
+.text_con p {
+    font-size: 16px;
+    line-height: 30px;
+    font-family: "Poppins", sans-serif;
+    color: rgb(218, 232, 232);
+}
+
+.home .shopping {
+    height: fit-content;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0;
+    margin-top: 2rem;
+}
+
+.shopping .link {
+    color: black;
+    background-color: white;
+    height: fit-content;
+    width: fit-content;
+    padding: 10px 25px;
+    font-size: 17px;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-family: var(--text-font);
+    transition: background-color 0.4s;
+}
+.shopping .link:hover{
+    color: white;
+    background-color: rgb(22, 22, 22);
+}
+
+@media screen and (max-width:1160px) {
+    .home {
+        width: 96%;
+        background-size: cover;
+    }
+
+    .text_con h1 {
+        font-size: 65px;
+    }
+
+    .text_con p {
+        font-size: 15px;
+    }
+
+    .shopping .link {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+}
+
+@media screen and (max-width:1000px) {
+    .home {
+        /* margin-top: 2rem; */
+        width: 100%;
+        background-size: cover;
+        height: 95vh;
+    }
+
+    .text_con h1 {
+        font-size: 58px;
+    }
+
+    .text_con {
+        margin: 5rem;
+        width: 100%;
+    }
+
+    .text_con p {
+        font-size: 14px;
+    }
+
+    .shopping .link {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+}
+
+@media screen and (max-width:800px) {
+
+    .home {
+        text-align: center;
+        width: 100%;
+        height: 98vh;
+    }
+
+    .text_con h1 {
+        width: 100%;
+        font-size: 45px;
+    }
+
+    .text_con {
+        margin: 20px auto;
+        width: 100%;
+    }
+
+    .text_con p {
+        font-size: 14px;
+    }
+
+    .shopping {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .shopping .link {
+        padding: 10px 17px;
+        font-size: 14px;
+        width: 100%;
+    }
+
+}
