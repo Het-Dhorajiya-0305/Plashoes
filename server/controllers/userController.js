@@ -219,7 +219,8 @@ const googleLogin = asyncHandler(async (req, res) => {
         .status(200)
         .cookie("refreshToken", refreshToken, option)
         .cookie("accessToken", accessToken, option)
-        .redirect(`http://localhost:5173/oauth/success?accessToken=${accessToken}`)
+        .redirect(`${process.env.FRONTEND_URL}/oauth/success?accessToken=${accessToken}`)
+
 });
 
 
